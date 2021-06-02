@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Mapper_interface Mapping-->
+<mapper namespace="com.koreait.spring.user.UserMapper">
+    <!--#과 $의 차이는 #은 정수,문자열 항상 홑따옴표를 붙여줌.-->
+    <insert id="insUser" parameterType="UserEntity">
+        INSERT INTO t_user
+        (uid, upw, unm, gender)
+        VALUES
+        (#{uid},#{upw},#{unm},#{gender})
+    </insert>
+    <delete id="delUser" parameterType="UserEntity">
+        DELETE FROM t_user
+        WHERE iuser = #{iuser}
+    </delete>
+
+</mapper>

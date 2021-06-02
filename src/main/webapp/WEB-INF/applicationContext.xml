@@ -2,7 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <context:component-scan base-package="com.koreait.spring" />
     <context:property-placeholder location="classpath:application.properties" />
     <!--properties에 작성한 DB정보들(Connection Pool 설정)-->
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
@@ -15,9 +23,13 @@
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
         <constructor-arg ref="hikariConfig" />
     </bean>
-
+    <!--mybatis를 사용하려면 써야하는 bean과 scan-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="typeAliasesPackage" value="com.koreait.spring" />
+    <!--classpath가 들어가면 defalut는 resources가 된다.-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml" />
     </bean>
+
+    <mybatis-spring:scan base-package="com.koreait.spring" />
 </beans>
