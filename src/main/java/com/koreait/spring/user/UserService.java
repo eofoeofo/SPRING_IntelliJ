@@ -1,5 +1,6 @@
 package com.koreait.spring.user;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,19 +10,33 @@ import javax.servlet.http.HttpSession;
 public class UserService{
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper mapper;
 
 
     public int insUser(UserEntity param) {
-        userMapper.insUser(param);
-        return 0;
+        String cryptPw = BCrypt.hashpw(param.getUpw(), BCrypt.gensalt());
+        param.setUpw(cryptPw);
+        return mapper.insUser(param);
+    }
+
+    public String login(UserEntity param) {
+        UserEntity result = mapper.selUser(param);
+        System.out.println("result : " +result.getUpw());
+        System.out.println("param : " +param.getUpw());
+        System.out.println("result :::::::: : " +result);
+        if(result == null) { // 아이디 없음
+            return "/user/login?err=1";
+        } else if(BCrypt.checkpw(param.getUpw(), result.getUpw())) { // 로그인 성공
+            return "/board/list";
+        } else { // 비밀번호 틀림
+            return "/user/login?err=2";
+        }
     }
 
     public int delUser(HttpSession session) {
         UserEntity param = (UserEntity)session.getAttribute("loginUser");
         System.out.println("param__del" + param);
-        userMapper.delUser(param);
-        return 0;
+        return mapper.delUser(param);
     }
 
 //    @Autowired

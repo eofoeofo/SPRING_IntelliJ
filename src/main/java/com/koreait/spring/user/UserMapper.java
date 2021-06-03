@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     int insUser(UserEntity param);
     int delUser(UserEntity param);
+    UserEntity selUser(UserEntity param);
 }
