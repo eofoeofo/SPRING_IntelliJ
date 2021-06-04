@@ -25,7 +25,6 @@ public class UserController {
 
     @RequestMapping("/login")
     // GET방식은 default값이다, 그러니 POST를 사용하려면 작성해야한다.
-
     // RequestParam은 jsp에서 getParameter, 쿼리스트링으로 무조건 줘야함?
     // 강제성이 있음 , 강제성을 해제하는법은 required = false, defaultValue = "0"
     public String login(@RequestParam(value="err", defaultValue = "0") int err, Model model) {

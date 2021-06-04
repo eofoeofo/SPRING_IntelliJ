@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>리스트^ㅡ^</title>
+    <div>로그인 아이디 : ${loginUser.uid}</div>
+    <link rel="stylesheet" href="/res/css/common.css">
+    <link rel="stylesheet" href="/res/css/boardList.css">
+    <script defer src="/res/js/boardList.js"></script>
 </head>
 <body>
 <table>

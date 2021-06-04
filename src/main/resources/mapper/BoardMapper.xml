@@ -15,4 +15,25 @@
         ON A.iuser = B.iuser
         ORDER BY iboard DESC;
     </select>
+
+    <select id="selBoardDetail" resultType="BoardDomain">
+        SELECT A.ctnt,
+               A.title,
+               A.regdt,
+               A.iuser,
+               A.iboard,
+               B.unm AS writerNm
+             FROM t_board A
+        INNER JOIN t_user B
+        ON A.iuser = B.iuser
+        WHERE A.iboard = #{iboard};
+    </select>
+
+    <delete id="delBoardDetail">
+                DELETE
+                FROM t_board
+                WHERE iboard = #{iboard}
+                AND iuser = #{iuser};
+    </delete>
+
 </mapper>

@@ -6,14 +6,27 @@
 <mapper namespace="com.koreait.spring.user.UserMapper">
     <!--#과 $의 차이는 #은 문자열 항상 홑따옴표를 붙여주고, 정수엔 안붙임.-->
     <insert id="insUser" parameterType="UserEntity">
-        INSERT INTO t_user
-        (uid, upw, unm, gender)
+        INSERT INTO
+            t_user
+            (
+             uid,
+             upw,
+             unm,
+             gender
+             )
         VALUES
-        (#{uid},#{upw},#{unm},#{gender})
+            (
+             #{uid},
+             #{upw},
+             #{unm},
+             #{gender}
+             )
     </insert>
     <delete id="delUser" parameterType="UserEntity">
-        DELETE FROM t_user
-        WHERE iuser = #{iuser}
+        DELETE FROM
+            t_user
+        WHERE
+            iuser = #{iuser}
     </delete>
 
     <select id="selUser" resultType="UserEntity">

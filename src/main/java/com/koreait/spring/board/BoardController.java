@@ -20,4 +20,17 @@ public class BoardController {
         model.addAttribute("list", list);
         return "board/list";
     }
+
+    @RequestMapping("/detail")
+    public String detail(BoardDTO param, Model model) {
+        model.addAttribute("data",service.selBoardDetail(param));
+        System.out.println("iboard : " + param.getIboard());
+        return "board/detail";
+    }
+
+    @RequestMapping("/delete")
+    public String delete(BoardDomain param) {
+        service.delBoardDetail(param);
+        return "board/list";
+    }
 }

@@ -3,7 +3,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- This tag registers the DefaultAnnotationHandlerMapping and
          AnnotationMethodHandlerAdapter beans that are required for Spring MVC  -->
@@ -21,6 +26,7 @@
     <!--css,js,img -->
     <!--/**는 /res의 모든 주소값 허용-->
     <!--모든 /의 요청은 dispatcher가 잡기때문에  /res의 경로를 설정해준것.-->
+    <!--1차 주소가 /res인 전부인것-->
     <mvc:resources mapping="/res/**" location="/res/" />
 
     <!--사용할 파일명을 완성해주는 객체?-->
@@ -28,4 +34,6 @@
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
+    <!--JackSon Bean 등록-->
+    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
 </beans>

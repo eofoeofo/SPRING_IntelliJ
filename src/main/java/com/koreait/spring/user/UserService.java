@@ -10,6 +10,9 @@ import javax.servlet.http.HttpSession;
 public class UserService{
 
     @Autowired
+    private HttpSession session;
+
+    @Autowired
     private UserMapper mapper;
 
 
@@ -27,6 +30,9 @@ public class UserService{
         if(result == null) { // 아이디 없음
             return "/user/login?err=1";
         } else if(BCrypt.checkpw(param.getUpw(), result.getUpw())) { // 로그인 성공
+            result.setUpw(null); // 로그인 성공 후 비밀번호 NULL 처리
+            // session 처리
+            session.setAttribute("loginUser",result);
             return "/board/list";
         } else { // 비밀번호 틀림
             return "/user/login?err=2";
