@@ -36,4 +36,19 @@
                 AND iuser = #{iuser};
     </delete>
 
+    <insert id="insCmt">
+        INSERT INTO
+            t_board_cmt
+        (
+            iboard,
+            iuser,
+            cmt
+        )
+        VALUES
+        (#{iboard},
+         #{iuser},
+         #{cmt}
+        )
+
+    </insert>
 </mapper>

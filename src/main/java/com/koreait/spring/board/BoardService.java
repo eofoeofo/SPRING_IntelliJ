@@ -20,4 +20,5 @@ public class BoardService {
     public BoardDomain delBoardDetail(BoardDomain param) {
         return mapper.delBoardDetail(param);
     }
+
 }

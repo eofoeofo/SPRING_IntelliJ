@@ -33,4 +33,5 @@ public class BoardController {
         service.delBoardDetail(param);
         return "board/list";
     }
+
 }

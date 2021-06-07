@@ -1,5 +1,6 @@
 package com.koreait.spring.board;
 
+import com.koreait.spring.cmt.CmtEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface BoardMapper {
     BoardDomain selBoardDetail(BoardDTO param);
 
     BoardDomain delBoardDetail(BoardDomain param);
+
+    int insCmt(CmtEntity param);
+
+
 }
