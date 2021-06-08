@@ -3,6 +3,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="/res/css/boardDetail.css">
+    <style>
+        .displayNone { display: none !important; }
+    </style>
     <script defer src="/res/js/boardDetail.js"></script>
     <script defer src="/res/js/common.js"></script>
     <meta charset="UTF-8">
@@ -38,6 +41,7 @@
 <div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
 
 
+
 <div id="modal" class="displayNone">
     <div class="modal_content">
         <form id="cmtUpdFrm" onsubmit="return false;">
@@ -48,5 +52,6 @@
         <input type="button" value="취소" onclick="closeUpdModal();">
     </div>
 </div>
+
 </body>
 </html>

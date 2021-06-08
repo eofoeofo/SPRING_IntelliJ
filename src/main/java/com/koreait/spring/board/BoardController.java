@@ -15,7 +15,18 @@ public class BoardController {
     private BoardService service;
 
     @RequestMapping("/list")
-    public String list(Model model) {
+    public String list(BoardDTO param, Model model) {
+//        final int recordCnt = 5;
+//        int intVal = Integer.parseInt(val);
+//        System.out.println("intVal :" + intVal);
+//        int cPage = intVal;
+//        if(cPage == 0){
+//            cPage = 1;
+//        }
+//        int startIdx = (cPage - 1) * recordCnt;
+//        param.setStartIdx(startIdx);
+//        param.setRecordCnt(recordCnt);
+//        model.addAttribute("pagingCnt", service.selPagingCnt(param));
         List<BoardDomain> list = service.selBoardList();
         model.addAttribute("list", list);
         return "board/list";

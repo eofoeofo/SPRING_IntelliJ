@@ -3,9 +3,8 @@ package com.koreait.spring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -62,6 +61,16 @@ public class UserController {
     public String joinDel(HttpSession session){
         service.delUser(session);
         return "redirect:/user/login";
+    }
+    @GetMapping("/profile")
+    public String profile() {
+        return "user/profile";
+    }
+
+//    @ResponseBody
+    @PostMapping("/profile")
+    public String profile(MultipartFile profileImg) { // view에서의 file형식은 MultipartFile을 통해서만 전송된다
+        return "redirect:" + service.uploadProfile(profileImg);
     }
 
 }

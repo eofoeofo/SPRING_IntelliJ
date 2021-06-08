@@ -23,7 +23,7 @@ function regCmt() {
 // 서버가 등록해야할 자료를 전달하는 함수
 function regAjax(param) {
 	const init = {
-		method: 'POST', // POST로 날림
+		method: 'POST', // POST로 날림 // REST (POST) - INSERT
 		body: JSON.stringify(param), // 문자열로 바꿈
 		headers:{ // JSON형태로 날리겠다
 			'accept' : 'application/json',
@@ -31,7 +31,7 @@ function regAjax(param) {
 		}
 	};
 
-	fetch('cmtIns', init)
+	fetch('cmt', init)
 		// res는 브라우저에서 JSON형태로 문자열을 받는다, 받고 myJson에 보낸다.
 
 		.then(function(res) {
@@ -54,7 +54,7 @@ function regAjax(param) {
 // 서버에게 댓글 리스트 자료를 요청하는 함수
 function getListAjax() {
 	var iboard = cmtListElem.dataset.iboard;
-	fetch('cmtSel?iboard=' + iboard)
+	fetch('cmt/' + iboard)
 		.then(function(res) {
 			return res.json();
 		})
@@ -138,13 +138,14 @@ function makeCmtElemList(data) { // JSON형태의 배열이 data
 
 function delAjax(icmt) {
 	const del = {
+		method: 'DELETE',
 		headers:{ // JSON형태로 날리겠다
 			'accept' : 'application/json',
 			'content-type' : 'application/json;charset=UTF-8'
 		}
 	};
 
-	fetch('cmtDel?icmt=' + icmt,del)
+	fetch('cmt/' + icmt,del)
 		.then(function(res) {
 			return res.json();
 		})
@@ -167,7 +168,7 @@ function updAjax() {
 		cmt: cmtUpdFrmElem.cmt.value
 	}
 	const init = {
-		method: 'POST', // POST로 날림
+		method: 'PUT', // POST로 날림
 		body: JSON.stringify(param), // 문자열로 바꿈
 		headers:{ // JSON형태로 날리겠다
 			'accept' : 'application/json',
@@ -175,7 +176,7 @@ function updAjax() {
 		}
 	};
 
-	fetch('cmtUpd', init)
+	fetch('cmt', init)
 		.then(function(res) {
 			console.log('res  : ' + res);
 			return res.json();

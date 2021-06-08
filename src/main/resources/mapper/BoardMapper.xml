@@ -29,6 +29,16 @@
         WHERE A.iboard = #{iboard};
     </select>
 
+    <select id="selPagingCnt" resultType="BoardDomain">
+        SELECT
+             CEIL(COUNT(*) / #{recordCnt}) AS recordCnt
+        FROM
+             t_board A
+        INNER JOIN
+             t_user B
+        ON A.iuser = B.iuser;
+    </select>
+
     <delete id="delBoardDetail">
                 DELETE
                 FROM t_board

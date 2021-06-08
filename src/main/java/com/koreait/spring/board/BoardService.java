@@ -21,4 +21,8 @@ public class BoardService {
         return mapper.delBoardDetail(param);
     }
 
+    public BoardDomain selPagingCnt(BoardDTO param) {
+        return mapper.selPagingCnt(param);
+    }
+
 }

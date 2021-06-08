@@ -28,6 +28,7 @@
     <!--모든 /의 요청은 dispatcher가 잡기때문에  /res의 경로를 설정해준것.-->
     <!--1차 주소가 /res인 전부인것-->
     <mvc:resources mapping="/res/**" location="/res/" />
+    <mvc:resources mapping="/img/**" location="file:///D:/springImg/" />
 
     <!--사용할 파일명을 완성해주는 객체?-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -16,5 +16,6 @@ public interface BoardMapper {
 
     int insCmt(CmtEntity param);
 
+    BoardDomain selPagingCnt(BoardDTO param);
 
 }
