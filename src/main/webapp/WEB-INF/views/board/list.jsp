@@ -1,18 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>리스트^ㅡ^</title>
-    <div>
-        <span>로그인 아이디 : ${loginUser.uid}</span>
-        <span><a href="/user/profile">PROFILE</a></span>
-    </div>
-    <link rel="stylesheet" href="/res/css/common.css">
-    <link rel="stylesheet" href="/res/css/boardList.css">
-    <script defer src="/res/js/boardList.js"></script>
-</head>
-<body>
+<div><a href="/board/write">글쓰기</a></div>
 <table>
     <tr>
         <th>번호</th>
@@ -39,7 +27,7 @@
                 </c:when>
 
                 <c:otherwise>
-                    <c:set var="img" value="/res/img/user/${item.iuser}/${item.profileImg}"/>
+                    <c:set var="img" value="/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}" />
                 </c:otherwise>
             </c:choose>
             <td>
@@ -83,5 +71,3 @@
 <%--        </div>--%>
 <%--    </form>--%>
 <%--</div>--%>
-</body>
-</html>

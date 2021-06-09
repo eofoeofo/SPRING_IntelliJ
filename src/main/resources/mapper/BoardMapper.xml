@@ -23,9 +23,9 @@
                A.iuser,
                A.iboard,
                B.unm AS writerNm
-             FROM t_board A
-        INNER JOIN t_user B
-        ON A.iuser = B.iuser
+                    FROM t_board A
+              INNER JOIN t_user B
+            ON A.iuser = B.iuser
         WHERE A.iboard = #{iboard};
     </select>
 
@@ -41,24 +41,39 @@
 
     <delete id="delBoardDetail">
                 DELETE
-                FROM t_board
+                FROM  t_board
                 WHERE iboard = #{iboard}
-                AND iuser = #{iuser};
+                AND   iuser  = #{iuser};
     </delete>
 
-    <insert id="insCmt">
+    <insert id="insBoard">
         INSERT INTO
-            t_board_cmt
-        (
-            iboard,
-            iuser,
-            cmt
-        )
-        VALUES
-        (#{iboard},
-         #{iuser},
-         #{cmt}
-        )
+                t_board
+                (
+                 title,
+                  ctnt,
+                 iuser
+                 )
 
+        VALUES (
+                #{title},
+                 #{ctnt},
+                #{iuser}
+                )
     </insert>
+
+    <update id="updBoard">
+        UPDATE
+              t_board
+        SET   title  = #{title},
+              ctnt   = #{ctnt}
+        WHERE iboard = #{iboard};
+    </update>
+
+    <delete id="delBoard">
+        DELETE FROM t_board
+        WHERE iboard = #{iboard}
+        AND   iuser  = #{iuser};
+    </delete>
+
 </mapper>

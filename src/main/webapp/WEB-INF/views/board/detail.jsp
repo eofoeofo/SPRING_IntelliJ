@@ -1,20 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <link rel="stylesheet" href="/res/css/boardDetail.css">
-    <style>
-        .displayNone { display: none !important; }
-    </style>
-    <script defer src="/res/js/boardDetail.js"></script>
-    <script defer src="/res/js/common.js"></script>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 <div>
     <a href="delete?iboard=${data.iboard}">삭제</a>
-    <a href="mod?iboard=${data.iboard}">수정</a>
+    <a href="update?iboard=${data.iboard}">수정</a>
 </div>
 <div>
     <a href="#" onclick="goBack();">돌아가기</a>
@@ -40,8 +28,6 @@
 </c:if>
 <div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}" data-iboard="${param.iboard}"></div>
 
-
-
 <div id="modal" class="displayNone">
     <div class="modal_content">
         <form id="cmtUpdFrm" onsubmit="return false;">
@@ -52,6 +38,3 @@
         <input type="button" value="취소" onclick="closeUpdModal();">
     </div>
 </div>
-
-</body>
-</html>

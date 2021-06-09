@@ -34,7 +34,24 @@
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
+        <property name="order" value="2" />
     </bean>
-    <!--JackSon Bean 등록-->
+
+    <!--InternalResolver가 아닌 TilesResolver를 우선적으로 사용하고,
+    사용할 수 없다면 InternalResolver를 사용 (property order 1,2) -->
+    <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        <property name="order" value="1" />
+    </bean>
+    <!-- JackSon Bean 등록 -->
     <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+
+    <!-- Tiles Bean 등록 -->
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions"> <!--list인 definitions-->
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
 </beans>

@@ -1,6 +1,5 @@
 package com.koreait.spring.board;
 
-import com.koreait.spring.cmt.CmtEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -14,8 +13,14 @@ public interface BoardMapper {
 
     BoardDomain delBoardDetail(BoardDomain param);
 
-    int insCmt(CmtEntity param);
-
     BoardDomain selPagingCnt(BoardDTO param);
+
+    int insBoard(BoardDomain param);
+
+    int updBoard(BoardDomain param);
+
+    int delBoard(BoardDomain param);
+
+    int writeMod(BoardDomain param);
 
 }

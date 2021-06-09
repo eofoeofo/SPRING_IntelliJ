@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 // bean 등록중 하나인 Controller, 주소값과 매핑되는 bean
@@ -71,6 +72,15 @@ public class UserController {
     @PostMapping("/profile")
     public String profile(MultipartFile profileImg) { // view에서의 file형식은 MultipartFile을 통해서만 전송된다
         return "redirect:" + service.uploadProfile(profileImg);
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session, HttpServletRequest request) {
+        session.invalidate();
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
+        // 로그아웃을 시도했을 당시의 페이지로 돌아가게끔 구현.
+        //return "redirect:/user/login";
     }
 
 }
