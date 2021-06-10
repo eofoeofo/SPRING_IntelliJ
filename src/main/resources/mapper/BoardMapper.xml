@@ -46,7 +46,7 @@
                 AND   iuser  = #{iuser};
     </delete>
 
-    <insert id="insBoard">
+    <insert id="insBoard" useGeneratedKeys="true" keyProperty="iboard">
         INSERT INTO
                 t_board
                 (

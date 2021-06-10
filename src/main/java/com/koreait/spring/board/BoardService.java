@@ -1,10 +1,11 @@
 package com.koreait.spring.board;
 
-import com.koreait.spring.user.UserEntity;
+import com.koreait.spring.MyUtils;
+import com.koreait.spring.cmt.CmtDomain;
+import com.koreait.spring.cmt.CmtMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -12,7 +13,9 @@ public class BoardService {
     @Autowired
     private BoardMapper mapper;
     @Autowired
-    private HttpSession session;
+    private CmtMapper cmtMapper;
+    @Autowired
+    private MyUtils myUtils;
 
     public List<BoardDomain> selBoardList() {
         return mapper.selBoardList();
@@ -30,8 +33,7 @@ public class BoardService {
     }
 
     public int insBoard(BoardDomain param) {
-        UserEntity loginUser = (UserEntity)session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        param.setIuser(myUtils.getLoginUserPk());
         System.out.println("iboard__write" + param.getIboard());
         return mapper.insBoard(param);
     }
@@ -42,19 +44,22 @@ public class BoardService {
     }
 
     public int delBoard(BoardDomain param) {
-        UserEntity loginUser = (UserEntity)session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
+        CmtDomain cmtParam = new CmtDomain();
+        cmtParam.setIboard(param.getIboard());
+        cmtMapper.delCmt(cmtParam);
+
+        param.setIuser(myUtils.getLoginUserPk());
         return mapper.delBoard(param);
     }
 
     public int writeMod(BoardDomain param) {
-        UserEntity loginUser = (UserEntity)session.getAttribute("loginUser");
-        param.setIuser(loginUser.getIuser());
-        if(param.getIboard() != 0) {
-            param.getIboard();
-            return mapper.updBoard(param);
+        param.setIuser(myUtils.getLoginUserPk());
+
+        if(param.getIboard() == 0) {
+            mapper.insBoard(param);
+        } else {
+            mapper.updBoard(param);
         }
-        param.getIboard();
-        return mapper.insBoard(param);
+        return param.getIboard();
     }
 }

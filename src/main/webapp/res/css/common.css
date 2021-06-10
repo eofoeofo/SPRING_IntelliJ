@@ -42,4 +42,7 @@ section { padding-left: 40px; padding-right: 40px; }
 
 .colorRed { color: red; }
 
+.fa-kiss-wink-heart { color: #e74c3c; }
+.pointer { cursor: pointer; }
+
 .displayNone { display: none !important; }

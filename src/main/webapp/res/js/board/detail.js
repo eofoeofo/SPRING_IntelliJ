@@ -2,6 +2,7 @@ var cmtFrmElem = document.querySelector('#cmtFrm');
 
 var cmtListElem = document.querySelector('#cmtList');
 var cmtUpdModalElem = document.querySelector('#modal');
+var favIconElem = document.querySelector('#favIcon');
 
 function enterKey() {
 	if (window.event.keyCode == 13) {
@@ -133,7 +134,6 @@ function makeCmtElemList(data) { // JSON형태의 배열이 data
 
 		tableElem.append(trElemItem);
 	});
-
 }
 
 function delAjax(icmt) {
@@ -208,5 +208,80 @@ function openUpdModal({ icmt, cmt }) {
 function closeUpdModal() {
 	cmtUpdModalElem.className = 'displayNone';
 }
+
+//LIKE 여부 가져오기
+function getFavAjax() {
+	var iboard = cmtListElem.dataset.iboard;
+	fetch('fav?iboard=' + iboard)
+		.then(function (res) {
+			return res.json();
+		})
+		.then(function (myJson){
+			toggleFav(myJson.result);
+		});
+}
+
+function insFavAjax() {
+	const param = {
+		iboard: cmtListElem.dataset.iboard
+	}
+	const init = {
+		method: 'POST', // POST로 날림 // REST (POST) - INSERT
+		body: JSON.stringify(param), // 문자열로 바꿈
+		headers: { // JSON형태로 날리겠다
+			'accept': 'application/json',
+			'content-type': 'application/json;charset=UTF-8'
+		}
+	};
+	fetch('fav',init)
+		.then(function (res) {
+			return res.json();
+		})
+		.then(function (myJson){
+			if(myJson.result === 1) {
+				toggleFav(1);
+			}
+		})
+}
+
+function delFavAjax() {
+	const param = {
+		iboard: cmtListElem.dataset.iboard
+	}
+	const init = {
+		method: 'DELETE'
+	}
+	fetch('fav?iboard='+param,init)
+		.then(function (res) {
+			return res.json();
+		})
+		.then(function (myJson) {
+			if(myJson.result === 1) {
+				toggleFav(0);
+			}
+		})
+}
+
+function toggleFav(toggle) {
+	switch (toggle) {
+		case 0:
+			favIconElem.classList.remove('fas');
+			favIconElem.classList.add('far');
+			break;
+		case 1:
+			favIconElem.classList.remove('far');
+			favIconElem.classList.add('fas');
+			break;
+	}
+}
+favIconElem.addEventListener('click', function () {
+	if(favIconElem.classList.contains('far')) { // 좋아요 처리 0 -> 1
+		insFavAjax();
+	} else { // 좋아요 취소 1 -> 0
+		delFavAjax();
+	}
+});
+
+getFavAjax(); // 바로 호출
 
 getListAjax();// 이 파일이 임포트 되면 함수 1회 호출

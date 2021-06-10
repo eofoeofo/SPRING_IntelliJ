@@ -8,25 +8,25 @@
         INSERT INTO
             t_board_cmt
             (
-             iboard,
-             iuser,
-             cmt
+               iboard
+             , iuser
+             , cmt
              )
         VALUES
-            (#{iboard},
-             #{iuser},
-             #{cmt}
+            ( #{iboard}
+            , #{iuser}
+            , #{cmt}
              )
 
     </insert>
 
     <select id="selCmt" resultType="CmtDomain">
-        SELECT A.icmt,
-               A.iuser,
-               A.cmt,
-               A.regdate,
-               B.profileImg,
-               B.unm AS writerNm
+        SELECT   A.icmt
+               , A.iuser
+               , A.cmt
+               , A.regdate
+               , B.profileImg
+               , B.unm AS writerNm
         FROM t_board_cmt A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
@@ -38,9 +38,14 @@
         DELETE FROM
             t_board_cmt
         WHERE
-            icmt = #{icmt}
+        <if test="iboard > 0">
+            iboard = #{iboard}
+        </if>
+        <if test="icmt > 0">
+            icmt   = #{icmt}
         AND
-            iuser = #{iuser};
+            iuser  = #{iuser};
+        </if>
     </delete>
 
     <update id="updCmt">

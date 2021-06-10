@@ -1,15 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
-    <a href="delete?iboard=${data.iboard}">삭제</a>
-    <a href="update?iboard=${data.iboard}">수정</a>
-</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/
+libs/font-awesome/5.15.3/css/all.min.css"
+integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<c:if test="${sessionScope.loginUser.iuser == data.iuser}">
+    <div>
+        <a href="delete?iboard=${data.iboard}">삭제</a>
+        <a href="writeMod?iboard=${param.iboard}">수정</a>
+    </div>
+</c:if>
 <div>
     <a href="#" onclick="goBack();">돌아가기</a>
 </div>
 <h1>${data.title}</h1>
 <div>
-    글번호 : ${data.iboard}
+    글번호 : ${data.iboard} | <i id="favIcon" class="far fa-kiss-wink-heart pointer"></i>
 </div>
 <div>
     작성자 : ${data.writerNm} | 작성일 : ${data.regdt}

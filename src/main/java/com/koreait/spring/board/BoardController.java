@@ -81,15 +81,18 @@ public class BoardController {
     }
 
     @GetMapping("/writeMod")
-    public String writeMod() {
+    public String writeMod(BoardDTO param, Model model) {
+        if(param.getIboard() > 0) {
+            model.addAttribute("data",service.selBoardDetail(param));
+        }
         return "board/writeMod";
     }
 
     @PostMapping("/writeMod")
-    public String writeMod(BoardDomain param) {
+    public String writeModProc(BoardDomain param) {
         int iboard = service.writeMod(param);
         System.out.println("write iboard = " + iboard);
         System.out.println("update iboard = " + iboard);
-        return "board/writeMod";
+        return "redirect:detail?iboard="+iboard;
     }
 }
