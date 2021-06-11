@@ -14,7 +14,8 @@ import java.util.Map;
 public class CmtController {
     @Autowired
     private CmtService service;
-
+    // @RequestParam은 파라미터값 하나 하나씩, 받을 때 쓴다.
+    // @RequestBody는 한꺼번에 받을 때 쓴다.
     @ResponseBody
     //ResponseBody을 주면 JSP파일 응답이 아닌, "JSON형태의 문자열을 객체화하는걸 목적으로 한다."
     @PostMapping("/cmt")

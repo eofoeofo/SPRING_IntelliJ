@@ -17,6 +17,10 @@
                 <li>
                     <a href="/user/logout">LOGOUT</a>
                 </li>
+
+                <li>
+                    <a href="/board/favList">LIKE</a>
+                </li>
             </c:otherwise>
         </c:choose>
         <li>

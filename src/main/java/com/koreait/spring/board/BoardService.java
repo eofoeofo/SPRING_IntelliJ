@@ -17,8 +17,15 @@ public class BoardService {
     @Autowired
     private MyUtils myUtils;
 
-    public List<BoardDomain> selBoardList() {
-        return mapper.selBoardList();
+    public List<BoardDomain> selBoardList(BoardDTO param) {
+        param.setIuser(myUtils.getLoginUserPk());
+        if(param.getPage() == 0){
+            param.setPage(1);
+        }
+        int startIdx = (param.getPage() - 1) * param.getRecordCnt();
+        param.setStartIdx(startIdx);
+        param.setRecordCnt(param.getRecordCnt());
+        return mapper.selBoardList(param);
     }
     public BoardDomain selBoardDetail(BoardDTO param) {
         return mapper.selBoardDetail(param);
@@ -28,7 +35,7 @@ public class BoardService {
         return mapper.delBoardDetail(param);
     }
 
-    public BoardDomain selPagingCnt(BoardDTO param) {
+    public int selPagingCnt(BoardDTO param) {
         return mapper.selPagingCnt(param);
     }
 

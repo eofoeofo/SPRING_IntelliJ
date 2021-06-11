@@ -3,9 +3,7 @@ package com.koreait.spring.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,18 +16,8 @@ public class BoardController {
 
     @RequestMapping("/list")
     public String list(BoardDTO param, Model model) {
-//        final int recordCnt = 5;
-//        int intVal = Integer.parseInt(val);
-//        System.out.println("intVal :" + intVal);
-//        int cPage = intVal;
-//        if(cPage == 0){
-//            cPage = 1;
-//        }
-//        int startIdx = (cPage - 1) * recordCnt;
-//        param.setStartIdx(startIdx);
-//        param.setRecordCnt(recordCnt);
-//        model.addAttribute("pagingCnt", service.selPagingCnt(param));
-        List<BoardDomain> list = service.selBoardList();
+        List<BoardDomain> list = service.selBoardList(param);
+        model.addAttribute("pagingCnt",service.selPagingCnt(param));
         model.addAttribute("list", list);
         return "board/list";
     }
@@ -94,5 +82,10 @@ public class BoardController {
         System.out.println("write iboard = " + iboard);
         System.out.println("update iboard = " + iboard);
         return "redirect:detail?iboard="+iboard;
+    }
+
+    @GetMapping("/favList")
+    public void favList() {
+
     }
 }

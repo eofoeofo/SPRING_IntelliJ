@@ -212,7 +212,7 @@ function closeUpdModal() {
 //LIKE 여부 가져오기
 function getFavAjax() {
 	var iboard = cmtListElem.dataset.iboard;
-	fetch('fav?iboard=' + iboard)
+	fetch('fav/' + iboard)
 		.then(function (res) {
 			return res.json();
 		})
@@ -220,6 +220,13 @@ function getFavAjax() {
 			toggleFav(myJson.result);
 		});
 }
+favIconElem.addEventListener('click', function () {
+	if(favIconElem.classList.contains('far')) { // 좋아요 처리 0 -> 1
+		insFavAjax();
+	} else { // 좋아요 취소 1 -> 0
+		delFavAjax();
+	}
+});
 
 function insFavAjax() {
 	const param = {
@@ -245,13 +252,12 @@ function insFavAjax() {
 }
 
 function delFavAjax() {
-	const param = {
-		iboard: cmtListElem.dataset.iboard
-	}
 	const init = {
 		method: 'DELETE'
 	}
-	fetch('fav?iboard='+param,init)
+	const iboard = cmtListElem.dataset.iboard;
+	console.log(iboard);
+	fetch('fav?iboard=' + iboard, init)
 		.then(function (res) {
 			return res.json();
 		})
@@ -274,13 +280,6 @@ function toggleFav(toggle) {
 			break;
 	}
 }
-favIconElem.addEventListener('click', function () {
-	if(favIconElem.classList.contains('far')) { // 좋아요 처리 0 -> 1
-		insFavAjax();
-	} else { // 좋아요 취소 1 -> 0
-		delFavAjax();
-	}
-});
 
 getFavAjax(); // 바로 호출
 

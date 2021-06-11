@@ -4,38 +4,51 @@
 
 <mapper namespace="com.koreait.spring.board.BoardMapper">
     <select id="selBoardList" resultType="BoardDomain">
-        SELECT A.iboard,
-               A.title,
-               A.iuser,
-               A.regdt,
-               B.unm AS writerNm,
-               B.profileimg
-             FROM t_board A
+        SELECT   A.iboard
+               , A.title
+               , A.iuser
+               , A.regdt
+               , B.unm as writerNm
+               , B.profileImg
+               , CASE WHEN C.iboard
+        IS NULL
+        THEN 0
+        ELSE 1
+        END AS isFav
+        FROM t_board A
         INNER JOIN t_user B
         ON A.iuser = B.iuser
-        ORDER BY iboard DESC;
+    <if test="selType == 0">
+        LEFT JOIN  t_board_fav C
+    </if>
+    <if test="selType == 1">
+        INNER JOIN t_board_fav C
+    </if>
+        ON A.iboard = C.iboard
+        AND C.iuser = #{iuser}
+        ORDER BY A.iboard DESC
+    <if test="recordCnt > 0">
+        LIMIT #{startIdx}
+            , #{recordCnt}
+    </if>
     </select>
-
     <select id="selBoardDetail" resultType="BoardDomain">
-        SELECT A.ctnt,
-               A.title,
-               A.regdt,
-               A.iuser,
-               A.iboard,
-               B.unm AS writerNm
+        SELECT   A.ctnt
+               , A.title
+               , A.regdt
+               , A.iuser
+               , A.iboard
+               , B.unm AS writerNm
                     FROM t_board A
-              INNER JOIN t_user B
-            ON A.iuser = B.iuser
+               INNER JOIN t_user B
+              ON A.iuser = B.iuser
         WHERE A.iboard = #{iboard};
     </select>
-
-    <select id="selPagingCnt" resultType="BoardDomain">
-        SELECT
-             CEIL(COUNT(*) / #{recordCnt}) AS recordCnt
-        FROM
-             t_board A
-        INNER JOIN
-             t_user B
+    <select id="selPagingCnt" resultType="_int">
+        SELECT CEIL(COUNT(*)
+/ #{recordCnt}) AS recordCnt
+              FROM t_board A
+         INNER JOIN t_user B
         ON A.iuser = B.iuser;
     </select>
 
