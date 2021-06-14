@@ -3,7 +3,9 @@ package com.koreait.spring.board;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -17,8 +19,8 @@ public class BoardController {
     @RequestMapping("/list")
     public String list(BoardDTO param, Model model) {
         List<BoardDomain> list = service.selBoardList(param);
-        model.addAttribute("pagingCnt",service.selPagingCnt(param));
         model.addAttribute("list", list);
+        model.addAttribute("pagingCnt",service.selPagingCnt(param));
         return "board/list";
     }
 

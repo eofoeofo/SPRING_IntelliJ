@@ -30,6 +30,18 @@
     <mvc:resources mapping="/res/**" location="/res/" />
     <mvc:resources mapping="/img/**" location="file:///D:/springImg/" />
 
+    <!--intercepter 설정-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/board/writeMod" />
+            <mvc:mapping path="/board/favList" />
+            <mvc:mapping path="/user/profile" />
+
+        <!--/**는 모든 주소가 AuthCheckIntercepter를 거친다-->
+            <bean class="com.koreait.spring.AuthCheckIntercepter" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--사용할 파일명을 완성해주는 객체?-->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />

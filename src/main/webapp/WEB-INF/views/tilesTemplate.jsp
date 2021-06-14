@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/res/css/common.css">
     <link rel="stylesheet" href="/res/css/<tiles:getAsString name="res"/>.css">
     <script defer src="/res/js/common.js"></script>
-    <script defer src="/res/js/<tiles:getAsString name="res" />.js"></script>
+    <script defer src="/res/js/<tiles:getAsString name="res"/>.js"></script>
     <%--getAsString안에 tiles.xml의 value값을 "문자열로" 들어간다--%>
 </head>
 <body>

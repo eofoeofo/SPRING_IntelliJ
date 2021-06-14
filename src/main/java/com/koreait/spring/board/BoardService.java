@@ -36,6 +36,7 @@ public class BoardService {
     }
 
     public int selPagingCnt(BoardDTO param) {
+        System.out.println(mapper.selPagingCnt(param));
         return mapper.selPagingCnt(param);
     }
 

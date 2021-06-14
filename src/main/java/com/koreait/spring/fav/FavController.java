@@ -1,13 +1,11 @@
 package com.koreait.spring.fav;
 
 import com.koreait.spring.board.BoardDTO;
-import com.koreait.spring.board.BoardDomain;
 import com.koreait.spring.board.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController // JSP를 return 목적이 아닌 JSON을 return하려는 목적이다.
@@ -27,9 +25,12 @@ public class FavController {
     }
 
     @GetMapping("/fav") // 좋아요 리스트
-    public List<BoardDomain> selFavBoardList(BoardDTO param) {
+    public Map<String, Object> selFavBoardList(BoardDTO param) {
+        Map<String, Object> result = new HashMap();
         param.setSelType(1);
-        return boardService.selBoardList(param);
+        result.put("list", boardService.selBoardList(param));
+        result.put("pagingCnt",boardService.selPagingCnt(param));
+        return result;
     }
 
     @GetMapping ("/fav/{iboard}")

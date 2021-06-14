@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div>
     <form action="list" id="frm">
-        <input type="hidden1" name="page" value="${param.page == null ? 1 : param.page}">
+        <input type="hidden" name="page" value="${param.page == null ? 1 : param.page}">
         <select name="recordCnt">
             <c:forEach begin="5" end="20" step="5" var="cnt">
                 <c:choose>
@@ -72,22 +72,22 @@
                 <span class="colorRed">${page}</span>
             </c:when>
             <c:otherwise>
-                <span><a href="list?page=${page}&recordCnt=${param.recordCnt}">${page}</a></span>
+                <span><a href="list?page=${page}&recordCnt=${param.recordCnt == null ? 5 : param.recordCnt}">${page}</a></span>
             </c:otherwise>
         </c:choose>
     </c:forEach>
 </div>
-<div>
-    <form action="listCCMC" method="get">
-        <div>
-            <select name="searchType">
-                <option value="1" ${param.searchType == 1 ? 'selected' : '' }>제목+내용</option>
-                <option value="2" ${param.searchType == 2 ? 'selected' : '' }>제목</option>
-                <option value="3" ${param.searchType == 3 ? 'selected' : '' }>내용</option>
-                <option value="4" ${param.searchType == 4 ? 'selected' : '' }>글쓴이</option>
-            </select>
-            <input type="search" name="searchText" value="${param.searchText}">
-            <input type="submit" value="검색">
-        </div>
-    </form>
-</div>
+<%--<div>--%>
+<%--    <form action="listCCMC" method="get">--%>
+<%--        <div>--%>
+<%--            <select name="searchType">--%>
+<%--                <option value="1" ${param.searchType == 1 ? 'selected' : '' }>제목+내용</option>--%>
+<%--                <option value="2" ${param.searchType == 2 ? 'selected' : '' }>제목</option>--%>
+<%--                <option value="3" ${param.searchType == 3 ? 'selected' : '' }>내용</option>--%>
+<%--                <option value="4" ${param.searchType == 4 ? 'selected' : '' }>글쓴이</option>--%>
+<%--            </select>--%>
+<%--            <input type="search" name="searchText" value="${param.searchText}">--%>
+<%--            <input type="submit" value="검색">--%>
+<%--        </div>--%>
+<%--    </form>--%>
+<%--</div>--%>

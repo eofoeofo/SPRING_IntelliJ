@@ -46,10 +46,13 @@
     </select>
     <select id="selPagingCnt" resultType="_int">
         SELECT CEIL(COUNT(*)
-/ #{recordCnt}) AS recordCnt
-              FROM t_board A
-         INNER JOIN t_user B
-        ON A.iuser = B.iuser;
+      / #{recordCnt}) AS recordCnt
+                    FROM t_board A
+      <if test="selType eq 1">
+          INNER JOIN t_board_fav C
+          ON     A.iboard = C.iboard
+          AND    C.iuser = #{iuser};
+      </if>
     </select>
 
     <delete id="delBoardDetail">
