@@ -78,7 +78,7 @@
     </c:forEach>
 </div>
 <%--<div>--%>
-<%--    <form action="listCCMC" method="get">--%>
+<%--    <form action="search" method="get">--%>
 <%--        <div>--%>
 <%--            <select name="searchType">--%>
 <%--                <option value="1" ${param.searchType == 1 ? 'selected' : '' }>제목+내용</option>--%>
