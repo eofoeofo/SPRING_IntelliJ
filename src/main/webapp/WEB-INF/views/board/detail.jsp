@@ -7,7 +7,7 @@
     </div>
 </c:if>
 <div>
-    <a href="list">돌아가기</a>
+    <a href="#" onclick="goBack();">돌아가기</a>
 </div>
 <h1>${data.title}</h1>
 <div>
@@ -43,3 +43,4 @@
         <input type="button" value="취소" onclick="closeUpdModal();">
     </div>
 </div>
+

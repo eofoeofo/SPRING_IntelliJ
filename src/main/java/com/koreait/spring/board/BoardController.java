@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -16,10 +14,9 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public String list(BoardDTO param, Model model) {
-        List<BoardDomain> list = service.selBoardList(param);
-        model.addAttribute("list", list);
+        model.addAttribute("list", service.selBoardList(param));
         model.addAttribute("pagingCnt",service.selPagingCnt(param));
         return "board/list";
     }

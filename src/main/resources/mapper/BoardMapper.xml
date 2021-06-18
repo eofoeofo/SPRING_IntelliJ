@@ -26,6 +26,19 @@
     </if>
         ON A.iboard = C.iboard
         AND C.iuser = #{iuser}
+        <if test="searchType == 1">
+            WHERE A.title LIKE CONCAT('%'+#{searchText}+'%')
+            OR A.ctnt LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 2">
+            WHERE A.title LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 3">
+            WHERE A.ctnt LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 4">
+            WHERE B.unm LIKE CONCAT('%',#{searchText},'%')
+        </if>
         ORDER BY A.iboard DESC
     <if test="recordCnt > 0">
         LIMIT #{startIdx}
@@ -53,6 +66,19 @@
           ON     A.iboard = C.iboard
           AND    C.iuser = #{iuser};
       </if>
+        <if test="searchType == 1">
+            WHERE A.title LIKE CONCAT('%'+#{searchText}+'%')
+            OR A.ctnt LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 2">
+            WHERE A.title LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 3">
+            WHERE A.ctnt LIKE CONCAT('%',#{searchText},'%')
+        </if>
+        <if test="searchType == 4">
+            WHERE B.unm LIKE CONCAT('%',#{searchText},'%')
+        </if>
     </select>
 
     <delete id="delBoardDetail">

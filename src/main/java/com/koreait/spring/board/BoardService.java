@@ -26,6 +26,8 @@ public class BoardService {
         param.setStartIdx(startIdx);
         param.setRecordCnt(param.getRecordCnt());
         return mapper.selBoardList(param);
+
+//        if(param.getSelType() !=0 && param.getSearchText() != null  )
     }
     public BoardDomain selBoardDetail(BoardDTO param) {
         return mapper.selBoardDetail(param);
